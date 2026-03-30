@@ -688,7 +688,7 @@ export default function Index() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="text-4xl">
                       {herb.emoji.startsWith('http') ? (
-                        <img src={herb.emoji} alt={herb.name} className="w-10 h-10 object-contain" />
+                        <img src={herb.emoji} alt={herb.name} className="w-10 h-10 object-contain mix-blend-multiply" />
                       ) : herb.emoji}
                     </div>
                     <span className="font-golos text-xs text-earth-400 bg-earth-900/50 px-2 py-1">
