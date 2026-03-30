@@ -193,7 +193,7 @@ const HERBS = [
   },
   {
     name: "Малина",
-    emoji: "https://cdn.poehali.dev/projects/a5c0cb41-3768-4fb7-b314-c1da93baff72/files/3f64edf8-c05b-4a27-83bc-f4c35396822d.jpg",
+    emoji: "https://cdn.poehali.dev/projects/a5c0cb41-3768-4fb7-b314-c1da93baff72/bucket/d4957c53-fcd9-4e13-9b17-e0bcab4c5065.png",
     properties: "Жаропонижающее, потогонное, противовирусное",
     use: "Варенье и чай при простуде, листья для полосканий горла, компот при жаре",
     recipe: "2 ст. ложки сушёных ягод или листьев залить стаканом кипятка, настоять 15 минут. Пить горячим при температуре, укрыться одеялом.",
