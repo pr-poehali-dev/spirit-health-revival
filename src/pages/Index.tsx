@@ -304,22 +304,31 @@ export default function Index() {
             ))}
           </div>
 
-          <div
-            className="mt-10 rounded-none overflow-hidden relative"
-            style={{ height: "280px" }}
-          >
-            <img
-              src="https://cdn.poehali.dev/projects/a5c0cb41-3768-4fb7-b314-c1da93baff72/files/48f398f8-c054-48f0-9a25-5acaac789eae.jpg"
-              alt="Народные узоры"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/80 flex items-center justify-center">
-              <blockquote className="text-center px-8">
-                <p className="font-cormorant text-2xl md:text-3xl italic text-earth-800 text-shadow-warm">
-                  «Что природа дала — то и бери,<br />что сам сотворил руками — то и цени»
+          <div className="mt-16 quote-block relative overflow-hidden">
+            <div className="quote-texture absolute inset-0" />
+            <div className="quote-vignette absolute inset-0" />
+
+            <div className="relative z-10 py-20 px-8 md:px-20 text-center">
+              <div className="quote-ornament-line mb-10 mx-auto" />
+
+              <div className="quote-mark-top font-cormorant text-earth-500/30 select-none">❝</div>
+
+              <blockquote className="mt-2 mb-6">
+                <p className="font-cormorant text-3xl md:text-5xl lg:text-6xl font-medium italic text-earth-900 leading-snug tracking-wide">
+                  Что природа дала — то и бери,
                 </p>
-                <cite className="font-golos text-sm text-earth-600 mt-3 block">— Народная мудрость</cite>
+                <p className="font-cormorant text-3xl md:text-5xl lg:text-6xl font-medium italic text-earth-700 leading-snug tracking-wide mt-2">
+                  что сам сотворил руками — то и цени
+                </p>
               </blockquote>
+
+              <div className="quote-mark-bottom font-cormorant text-earth-500/30 select-none">❞</div>
+
+              <div className="quote-ornament-line mt-10 mx-auto" />
+
+              <cite className="font-golos text-sm tracking-[0.35em] uppercase text-earth-600 mt-8 block not-italic">
+                — Народная мудрость
+              </cite>
             </div>
           </div>
         </div>
