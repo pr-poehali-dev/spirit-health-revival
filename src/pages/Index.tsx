@@ -346,72 +346,85 @@ export default function Index() {
             ))}
           </div>
 
-          <div className="mt-16 quote-block relative overflow-hidden">
-            <div className="quote-texture absolute inset-0" />
-            <div className="quote-vignette absolute inset-0" />
+          <div className="mt-16 quote-block">
 
-            {/* Prev / Next arrows */}
-            <button
-              onClick={() => goToQuote(quoteIndex - 1)}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center text-earth-500 hover:text-earth-800 transition-colors"
-              aria-label="Предыдущая цитата"
-            >
-              <Icon name="ChevronLeft" size={28} />
-            </button>
-            <button
-              onClick={() => goToQuote(quoteIndex + 1)}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center text-earth-500 hover:text-earth-800 transition-colors"
-              aria-label="Следующая цитата"
-            >
-              <Icon name="ChevronRight" size={28} />
-            </button>
+            <div className="parchment-scroll">
+              <div className="parchment-inner">
 
-            <div className="relative z-10 py-20 px-16 md:px-32 text-center min-h-[340px] flex flex-col items-center justify-center">
-              <div className="quote-ornament-line mb-10 mx-auto" />
+                {/* Стрелки — поверх пергамента */}
+                <button
+                  onClick={() => goToQuote(quoteIndex - 1)}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 flex items-center justify-center text-earth-600/50 hover:text-earth-800 transition-colors"
+                  aria-label="Предыдущая цитата"
+                >
+                  <Icon name="ChevronLeft" size={24} />
+                </button>
+                <button
+                  onClick={() => goToQuote(quoteIndex + 1)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 flex items-center justify-center text-earth-600/50 hover:text-earth-800 transition-colors"
+                  aria-label="Следующая цитата"
+                >
+                  <Icon name="ChevronRight" size={24} />
+                </button>
 
-              <div className="quote-mark-top font-cormorant text-earth-500/30 select-none">❝</div>
+                <div className="text-center min-h-[280px] flex flex-col items-center justify-center py-8">
+                  <div className="quote-ornament-line mb-8 mx-auto" />
 
-              <blockquote
-                className="mt-2 mb-6 transition-all duration-350"
-                style={{ opacity: quoteVisible ? 1 : 0, transform: quoteVisible ? 'translateY(0)' : 'translateY(12px)' }}
-              >
-                <p className="font-cormorant text-2xl md:text-4xl lg:text-5xl font-medium italic text-earth-900 leading-snug tracking-wide max-w-3xl mx-auto">
-                  {QUOTES[quoteIndex].text}
-                </p>
-              </blockquote>
+                  <div className="quote-mark-top font-cormorant select-none">❝</div>
 
-              <div className="quote-mark-bottom font-cormorant text-earth-500/30 select-none">❞</div>
-
-              <div className="quote-ornament-line mt-10 mx-auto" />
-
-              <cite
-                className="font-golos text-sm tracking-[0.35em] uppercase text-earth-600 mt-8 block not-italic transition-all duration-350"
-                style={{ opacity: quoteVisible ? 1 : 0 }}
-              >
-                — {QUOTES[quoteIndex].source}
-              </cite>
-
-              {/* Dots */}
-              <div className="flex gap-2 mt-8">
-                {QUOTES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goToQuote(i)}
-                    className="transition-all duration-300"
-                    aria-label={`Цитата ${i + 1}`}
+                  <blockquote
+                    className="mt-1 mb-4 transition-all"
+                    style={{
+                      opacity: quoteVisible ? 1 : 0,
+                      transform: quoteVisible ? 'translateY(0)' : 'translateY(10px)',
+                      transition: 'opacity 0.35s ease, transform 0.35s ease',
+                    }}
                   >
-                    <span
-                      className="block rounded-full transition-all duration-300"
-                      style={{
-                        width: i === quoteIndex ? '24px' : '6px',
-                        height: '6px',
-                        background: i === quoteIndex ? '#8b5e2a' : '#d4a85c80',
-                      }}
-                    />
-                  </button>
-                ))}
+                    <p className="font-cormorant text-2xl md:text-3xl lg:text-4xl font-medium italic leading-snug tracking-wide max-w-2xl mx-auto"
+                       style={{ color: '#3d2106' }}>
+                      {QUOTES[quoteIndex].text}
+                    </p>
+                  </blockquote>
+
+                  <div className="quote-mark-bottom font-cormorant select-none">❞</div>
+
+                  <div className="quote-ornament-line mt-8 mx-auto" />
+
+                  <cite
+                    className="font-golos text-xs tracking-[0.35em] uppercase mt-6 block not-italic transition-all"
+                    style={{
+                      color: '#7a5020',
+                      opacity: quoteVisible ? 1 : 0,
+                      transition: 'opacity 0.35s ease 0.1s',
+                    }}
+                  >
+                    — {QUOTES[quoteIndex].source}
+                  </cite>
+
+                  {/* Точки */}
+                  <div className="flex gap-2 mt-7">
+                    {QUOTES.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => goToQuote(i)}
+                        aria-label={`Цитата ${i + 1}`}
+                      >
+                        <span
+                          className="block rounded-full transition-all duration-300"
+                          style={{
+                            width: i === quoteIndex ? '22px' : '6px',
+                            height: '6px',
+                            background: i === quoteIndex ? '#7a4f1e' : 'rgba(139,94,42,0.35)',
+                          }}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
+
           </div>
         </div>
       </section>
