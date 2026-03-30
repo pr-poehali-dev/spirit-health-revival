@@ -1,5 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Icon from "@/components/ui/icon";
+
+const QUOTES = [
+  {
+    text: "Что природа дала — то и бери, что сам сотворил руками — то и цени",
+    source: "Народная мудрость",
+  },
+  {
+    text: "В лесу живёт тот, кто умеет слушать тишину",
+    source: "Народная мудрость",
+  },
+  {
+    text: "Трава сухая — не мёртвая: в ней жизнь спит до весны",
+    source: "Из травника, XVII век",
+  },
+  {
+    text: "Баня — мать родна: кости распарит, всё исправит",
+    source: "Народная поговорка",
+  },
+  {
+    text: "Один корень — сто недугов лечит, если знаешь, как спросить",
+    source: "Слова знахаря",
+  },
+  {
+    text: "Мёд — не лекарство, мёд — это солнце, собранное пчелой",
+    source: "Народная мудрость",
+  },
+];
 
 const HERBS = [
   {
@@ -118,6 +145,21 @@ export default function Index() {
   const [activeSection, setActiveSection] = useState("Главная");
   const [selectedHerb, setSelectedHerb] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [quoteVisible, setQuoteVisible] = useState(true);
+
+  const goToQuote = useCallback((idx: number) => {
+    setQuoteVisible(false);
+    setTimeout(() => {
+      setQuoteIndex((idx + QUOTES.length) % QUOTES.length);
+      setQuoteVisible(true);
+    }, 350);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => goToQuote(quoteIndex + 1), 6000);
+    return () => clearInterval(timer);
+  }, [quoteIndex, goToQuote]);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -308,17 +350,33 @@ export default function Index() {
             <div className="quote-texture absolute inset-0" />
             <div className="quote-vignette absolute inset-0" />
 
-            <div className="relative z-10 py-20 px-8 md:px-20 text-center">
+            {/* Prev / Next arrows */}
+            <button
+              onClick={() => goToQuote(quoteIndex - 1)}
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center text-earth-500 hover:text-earth-800 transition-colors"
+              aria-label="Предыдущая цитата"
+            >
+              <Icon name="ChevronLeft" size={28} />
+            </button>
+            <button
+              onClick={() => goToQuote(quoteIndex + 1)}
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center text-earth-500 hover:text-earth-800 transition-colors"
+              aria-label="Следующая цитата"
+            >
+              <Icon name="ChevronRight" size={28} />
+            </button>
+
+            <div className="relative z-10 py-20 px-16 md:px-32 text-center min-h-[340px] flex flex-col items-center justify-center">
               <div className="quote-ornament-line mb-10 mx-auto" />
 
               <div className="quote-mark-top font-cormorant text-earth-500/30 select-none">❝</div>
 
-              <blockquote className="mt-2 mb-6">
-                <p className="font-cormorant text-3xl md:text-5xl lg:text-6xl font-medium italic text-earth-900 leading-snug tracking-wide">
-                  Что природа дала — то и бери,
-                </p>
-                <p className="font-cormorant text-3xl md:text-5xl lg:text-6xl font-medium italic text-earth-700 leading-snug tracking-wide mt-2">
-                  что сам сотворил руками — то и цени
+              <blockquote
+                className="mt-2 mb-6 transition-all duration-350"
+                style={{ opacity: quoteVisible ? 1 : 0, transform: quoteVisible ? 'translateY(0)' : 'translateY(12px)' }}
+              >
+                <p className="font-cormorant text-2xl md:text-4xl lg:text-5xl font-medium italic text-earth-900 leading-snug tracking-wide max-w-3xl mx-auto">
+                  {QUOTES[quoteIndex].text}
                 </p>
               </blockquote>
 
@@ -326,9 +384,33 @@ export default function Index() {
 
               <div className="quote-ornament-line mt-10 mx-auto" />
 
-              <cite className="font-golos text-sm tracking-[0.35em] uppercase text-earth-600 mt-8 block not-italic">
-                — Народная мудрость
+              <cite
+                className="font-golos text-sm tracking-[0.35em] uppercase text-earth-600 mt-8 block not-italic transition-all duration-350"
+                style={{ opacity: quoteVisible ? 1 : 0 }}
+              >
+                — {QUOTES[quoteIndex].source}
               </cite>
+
+              {/* Dots */}
+              <div className="flex gap-2 mt-8">
+                {QUOTES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goToQuote(i)}
+                    className="transition-all duration-300"
+                    aria-label={`Цитата ${i + 1}`}
+                  >
+                    <span
+                      className="block rounded-full transition-all duration-300"
+                      style={{
+                        width: i === quoteIndex ? '24px' : '6px',
+                        height: '6px',
+                        background: i === quoteIndex ? '#8b5e2a' : '#d4a85c80',
+                      }}
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
