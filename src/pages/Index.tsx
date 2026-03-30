@@ -193,7 +193,7 @@ const HERBS = [
   },
   {
     name: "Малина",
-    emoji: "🍓",
+    emoji: "https://cdn.poehali.dev/projects/a5c0cb41-3768-4fb7-b314-c1da93baff72/files/3f64edf8-c05b-4a27-83bc-f4c35396822d.jpg",
     properties: "Жаропонижающее, потогонное, противовирусное",
     use: "Варенье и чай при простуде, листья для полосканий горла, компот при жаре",
     recipe: "2 ст. ложки сушёных ягод или листьев залить стаканом кипятка, настоять 15 минут. Пить горячим при температуре, укрыться одеялом.",
@@ -686,7 +686,11 @@ export default function Index() {
               >
                 <div className={`bg-gradient-to-br ${herb.color} p-5`}>
                   <div className="flex items-start justify-between mb-3">
-                    <div className="text-4xl">{herb.emoji}</div>
+                    <div className="text-4xl">
+                      {herb.emoji.startsWith('http') ? (
+                        <img src={herb.emoji} alt={herb.name} className="w-10 h-10 object-contain" />
+                      ) : herb.emoji}
+                    </div>
                     <span className="font-golos text-xs text-earth-400 bg-earth-900/50 px-2 py-1">
                       {herb.season}
                     </span>
